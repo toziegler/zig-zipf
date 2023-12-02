@@ -16,7 +16,7 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
 
     const lib = b.addStaticLibrary(.{
-        .name = "zig-zipf",
+        .name = "zipf",
         // In this case the main source file is merely a path, however, in more
         // complicated build scripts, this could be a generated file.
         .root_source_file = .{ .path = "src/main.zig" },
@@ -38,7 +38,8 @@ pub fn build(b: *std.Build) void {
             .target = target,
             .optimize = optimize,
         });
-
+        const zipf = b.addModule("zipf", .{ .source_file = .{ .path = "src/main.zig" } });
+        exe.addModule("zipf", zipf);
         // This declares intent for the executable to be installed into the
         // standard location when the user invokes the "install" step (the default
         // step when running `zig build`).

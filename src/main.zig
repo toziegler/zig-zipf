@@ -41,7 +41,7 @@ const ZipfDistributionError = error{
     ElementsZero,
     ExponentZeroOrNegative,
 };
-const ZipfDistribution = struct {
+pub const ZipfDistribution = struct {
     // number elemnts
     num_elements: f64,
     // exponent parameter of the distribution
