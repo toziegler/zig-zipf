@@ -13,7 +13,7 @@ In `build.zig.zon`:
     .zipf = .{
         .path = "./libs/zig-zipf/",
     },
-}
+},
 ```
 
 In `build.zig`:
