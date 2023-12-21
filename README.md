@@ -8,7 +8,7 @@ Both are based on the method described by Wolfgang Hörmann and Gerhard Derfling
 
 ```rust 
 const std = @import("std");
-const zipf = @import("zig-zipf");
+const zipf = @import("zipf");
 
 pub fn main() !void {
     var prng = std.rand.DefaultPrng.init(blk: {
