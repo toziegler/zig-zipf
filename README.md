@@ -2,7 +2,7 @@
 # Zig Zipf: A Zipf-Distributed RNG
 
 Welcome to Zig Zipf! This is a Zig implementation of a fast, discrete, bounded, Zipf-distributed random number generator. 
-Our implementation offers a robust and efficient solution for generating (Zipf-distributed)[https://en.wikipedia.org/wiki/Zipf%27s_law] numbers, ideal for various applications ranging from statistical modeling, natural language processing, database benchmarking and load testing.
+Our implementation offers a robust and efficient solution for generating [Zipf-distributed](https://en.wikipedia.org/wiki/Zipf%27s_law) numbers, ideal for various applications ranging from statistical modeling, natural language processing, database benchmarking and load testing.
 
 ## Background
 
