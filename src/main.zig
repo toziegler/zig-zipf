@@ -16,6 +16,6 @@ pub fn main() !void {
         result ^= zipf_distribution.next(&rand) ^ result;
     }
     const duration_ns = timer.read();
-    std.debug.print("Benchmark took {} nanoseconds", .{duration_ns});
-    std.debug.print("Single Zipf sample takes {} nanoseconds", .{@as(f64, @floatFromInt(duration_ns)) / samples});
+    std.debug.print("Benchmark took {} nanoseconds \n", .{duration_ns});
+    std.debug.print("Single Zipf sample takes {} nanoseconds\n", .{@as(f64, @floatFromInt(duration_ns)) / samples});
 }
