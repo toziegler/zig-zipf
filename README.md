@@ -1,6 +1,3 @@
-To improve the readability and user-friendliness of your README, consider the following enhanced version:
-
----
 
 # Zig Zipf: A Zipf-Distributed RNG
 
