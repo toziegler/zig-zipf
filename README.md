@@ -6,7 +6,7 @@ Both are based on the method described by Wolfgang Hörmann and Gerhard Derfling
 
 ## Minimal Example 
 
-```rust 
+```zig
 const std = @import("std");
 const zipf = @import("zipf");
 
@@ -17,9 +17,13 @@ pub fn main() !void {
         break :blk seed;
     });
     const rand = prng.random();
-    var zipf_distribution = try zipf.ZipfDistribution.init(1000000, 1.07); // same config as in rust repo i.e. number elements and exponent 
-    var number = zipf_distribution.next(rand);
+    // 1. param number elements Range [1, num_elements]  2. param zipf exponent
+    var zipf_distribution = try zipf.ZipfDistribution.init(1000000, 1.07); 
+
+    const number = zipf_distribution.next(&rand);
+    std.debug.print("number {d}", .{number});
 }
+
 
 ```
 
