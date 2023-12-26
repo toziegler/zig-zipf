@@ -1,10 +1,21 @@
-# Zig Zipf
-This is a Zig implementation of a fast, discrete, bounded, Zipf-distributed random number generator. 
+To improve the readability and user-friendliness of your README, consider the following enhanced version:
 
-This implementation is effectively a direct port of  [Jon Gjengset's zipf implementation  in Rust](https://github.com/jonhoo/rust-zipf)  which itself is a port of Apache Common's RejectionInversionZipfSampler, written in Java. 
-Both are based on the method described by Wolfgang Hörmann and Gerhard Derflinger in Rejection-inversion to generate variates from monotone discrete distributions from ACM Transactions on Modeling and Computer Simulation (TOMACS) 6.3 (1996).
+---
 
-## Minimal Example 
+# Zig Zipf: A Zipf-Distributed RNG
+
+Welcome to Zig Zipf! This is a Zig implementation of a fast, discrete, bounded, Zipf-distributed random number generator. 
+Our implementation offers a robust and efficient solution for generating (Zipf-distributed)[https://en.wikipedia.org/wiki/Zipf%27s_law] numbers, ideal for various applications ranging from statistical modeling, natural language processing, database benchmarking and load testing.
+
+## Background
+
+Our work is a direct port of Jon Gjengset's zipf implementation in Rust, which can be found [here](https://github.com/jonhoo/rust-zipf). 
+This Rust implementation is itself a port of the Apache Commons' RejectionInversionZipfSampler, originally written in Java. 
+The foundational method for our implementation is sourced from the research by Wolfgang Hörmann and Gerhard Derflinger in their paper "Rejection-inversion to generate variates from monotone discrete distributions," published in ACM Transactions on Modeling and Computer Simulation (TOMACS) 6.3 (1996).
+
+## Quick Start: Minimal Example 
+
+Get started quickly with this minimal example in Zig:
 
 ```zig
 const std = @import("std");
@@ -17,39 +28,37 @@ pub fn main() !void {
         break :blk seed;
     });
     const rand = prng.random();
-    // 1. param number elements Range [1, num_elements]  2. param zipf exponent
     var zipf_distribution = try zipf.ZipfDistribution.init(1000000, 1.07); 
 
     const number = zipf_distribution.next(&rand);
     std.debug.print("number {d}", .{number});
 }
-
-
 ```
 
-## Add the library with Zon 
-```
-mkdir libs && cd $_
-git submodule add git@github.com:toziegler/zig-zipf.git
-```
+## Installation Guide
 
-In `build.zig.zon`:
+### Add the Library with Zon and Git Submodules
 
-```
-.dependencies = .{
-    .zipf = .{
-        .path = "./libs/zig-zipf/",
+1. Create a directory for libraries and add Zig Zipf as a submodule:
+    ```
+    mkdir libs && cd $_
+    git submodule add git@github.com:toziegler/zig-zipf.git
+    ```
+
+2. In your `build.zig.zon` file, include the following:
+    ```
+    .dependencies = .{
+        .zipf = .{
+            .path = "./libs/zig-zipf/",
+        },
     },
-},
-```
+    ```
 
-In `build.zig`:
-
-```
-const zipf = b.dependency("zipf", .{
-    .target = target,
-    .optimize = optimize,
-});
-exe.addModule("zipf", zipf.module("zipf"));
-
-```
+3. Finally, in your `build.zig` file, add the following lines:
+    ```
+    const zipf = b.dependency("zipf", .{
+        .target = target,
+        .optimize = optimize,
+    });
+    exe.addModule("zipf", zipf.module("zipf"));
+    ```
