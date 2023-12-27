@@ -34,7 +34,38 @@ pub fn main() !void {
 
 ## Installation Guide
 
-### Add the Library with Zon and Git Submodules
+### Add the Library with Zon
+
+1. Declare zig zipf as a dependency in build.zig.zon: 
+
+```
+	 .dependencies = .{
+				.zipf = .{
+						  .url = "https://github.com/toziegler/zig-zipf/archive/refs/tags/v1.0.tar.gz",
+						  .hash = "122003ade97e0a690c28fb264aeedf6958ec57ee94087438dd6d1e7dbcffc7dab461",
+				},
+	 },
+```
+
+2. Add the module in `build.zig`
+
+```diff
+
+    const exe = b.addExecutable(.{
+        .name = "zigzipfexample",
+        .root_source_file = .{ .path = "src/main.zig" },
+        .target = target,
+        .optimize = optimize,
+    });
+
++   const opts = .{ .target = target, .optimize = optimize };
++   const zipf = b.dependency("zipf", opts).module("zipf");
++   exe.addModule("zipf", zipf);
+```
+
+
+
+### Add the Library with Git Submodules
 
 1. Create a directory for libraries and add Zig Zipf as a submodule:
     ```
