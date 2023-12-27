@@ -39,12 +39,12 @@ pub fn main() !void {
 1. Declare zig zipf as a dependency in build.zig.zon: 
 
 ```
-	 .dependencies = .{
-				.zipf = .{
-						  .url = "https://github.com/toziegler/zig-zipf/archive/refs/tags/v1.0.tar.gz",
-						  .hash = "122003ade97e0a690c28fb264aeedf6958ec57ee94087438dd6d1e7dbcffc7dab461",
-				},
-	 },
+.dependencies = .{
+    .zipf = .{
+        .url = "https://github.com/toziegler/zig-zipf/archive/refs/tags/v1.0.tar.gz",
+            .hash = "122003ade97e0a690c28fb264aeedf6958ec57ee94087438dd6d1e7dbcffc7dab461",
+    },
+},
 ```
 
 2. Add the module in `build.zig`
