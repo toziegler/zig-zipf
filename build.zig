@@ -13,7 +13,12 @@ pub fn build(b: *std.Build) void {
     });
 
     b.installArtifact(lib);
-    const zipf = b.addModule("zipf", .{ .source_file = .{ .path = "src/root.zig" } });
+
+    const zipf = b.addModule("zipf", .{
+        .root_source_file = b.path("src/root.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
 
     const exe = b.addExecutable(.{
         .name = "zipf",
@@ -22,7 +27,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    exe.addModule("zipf", zipf);
+    exe.root_module.addImport("zipf", zipf);
 
     b.installArtifact(exe);
 

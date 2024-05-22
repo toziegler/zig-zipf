@@ -21,7 +21,7 @@ const zipf = @import("zipf");
 pub fn main() !void {
     var prng = std.rand.DefaultPrng.init(blk: {
         var seed: u64 = undefined;
-        try std.os.getrandom(std.mem.asBytes(&seed));
+        try std.posix.getrandom(std.mem.asBytes(&seed));
         break :blk seed;
     });
     const rand = prng.random();
@@ -37,20 +37,25 @@ pub fn main() !void {
 ### Add the Library with Zon
 
 1. Declare zig zipf as a dependency in build.zig.zon: 
-
-```
+```zig
 .dependencies = .{
     .zipf = .{
-        .url = "https://github.com/toziegler/zig-zipf/archive/refs/tags/v1.0.tar.gz",
-            .hash = "122003ade97e0a690c28fb264aeedf6958ec57ee94087438dd6d1e7dbcffc7dab461",
+        // This can be found by navigating to
+        // https://github.com/toziegler/zig-zipf/releases and obtaining the
+        // link to the tar file for the latest release.
+        .url = "https://github.com/toziegler/zig-zipf/archive/refs/tags/<latest release>.tar.gz",
+        .hash = "<latest release hash>"
+        // You may also leave out the .hash field. This will cause `zig build`
+        // to tell you the correct hash when you go to build your project, and
+        // you can include it here.
     },
 },
 ```
+Release Hashes:
+* v1.0: `122003ade97e0a690c28fb264aeedf6958ec57ee94087438dd6d1e7dbcffc7dab461`
 
 2. Add the module in `build.zig`
-
 ```diff
-
     const exe = b.addExecutable(.{
         .name = "zigzipfexample",
         .root_source_file = .{ .path = "src/main.zig" },
@@ -58,12 +63,12 @@ pub fn main() !void {
         .optimize = optimize,
     });
 
-+   const opts = .{ .target = target, .optimize = optimize };
-+   const zipf = b.dependency("zipf", opts).module("zipf");
-+   exe.addModule("zipf", zipf);
++   const zipf = b.dependency("zipf", .{
++       .target = target,
++       .optimize = optimize,
++   });
++   exe.root_module.addImport("zipf", zipf.module("zipf"));
 ```
-
-
 
 ### Add the Library with Git Submodules
 
@@ -88,5 +93,5 @@ pub fn main() !void {
         .target = target,
         .optimize = optimize,
     });
-    exe.addModule("zipf", zipf.module("zipf"));
+    exe.root_module.addImport("zipf", zipf.module("zipf"));
     ```
