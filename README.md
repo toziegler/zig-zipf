@@ -43,8 +43,8 @@ pub fn main() !void {
         // This can be found by navigating to
         // https://github.com/toziegler/zig-zipf/releases and obtaining the
         // link to the tar file for the latest release.
-        .url = "https://github.com/toziegler/zig-zipf/archive/refs/tags/<latest release>.tar.gz",
-        .hash = "<latest release hash>"
+        .url = "https://github.com/toziegler/zig-zipf/archive/refs/tags/v1.1.tar.gz",
+        .hash = "122041950ce7abb1709e3e4a905429359724f11be50a223b77b9f7c1e4ce6200a942",
         // You may also leave out the .hash field. This will cause `zig build`
         // to tell you the correct hash when you go to build your project, and
         // you can include it here.
@@ -52,6 +52,7 @@ pub fn main() !void {
 },
 ```
 Release Hashes:
+* v1.1: `122041950ce7abb1709e3e4a905429359724f11be50a223b77b9f7c1e4ce6200a942`
 * v1.0: `122003ade97e0a690c28fb264aeedf6958ec57ee94087438dd6d1e7dbcffc7dab461`
 
 2. Add the module in `build.zig`
